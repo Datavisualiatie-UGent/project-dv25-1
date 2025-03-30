@@ -1,0 +1,9 @@
+[
+    {"year": "1957", "launches": 3, "event": "Sputnik 1"},
+    {"year": "1961", "launches": 8, "event": "Vostok 1 (First human in space)"},
+    {"year": "1969", "launches": 15, "event": "Apollo 11 Moon Landing"},
+    {"year": "1981", "launches": 2, "event": "First Space Shuttle Launch"},
+    {"year": "1998", "launches": 7, "event": "ISS Construction Begins"},
+    {"year": "2011", "launches": 5, "event": "Final Space Shuttle Mission"},
+    {"year": "2020", "launches": 114, "event": "Commercial Crew Program"}
+]
