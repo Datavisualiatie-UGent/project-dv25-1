@@ -23,6 +23,7 @@ function convertDateToInterval(date) {
 export function Importance(data, user_gender, user_age, user_importance) {
     let interval = convertDateToInterval(user_age);
 
+    // Processing the data makes it easier to plot it
     let data_processed = data.map(row => ({
         age: row.age,
         gender: row.gender,
@@ -51,7 +52,7 @@ export function Importance(data, user_gender, user_age, user_importance) {
 
     let user_data = [{age: interval, gender: user_gender, how_important: user_importance, title: title}];
 
-    console.log(user_data);
+
     return Plot.plot({
         marginBottom: 40,
         fx: {padding: 0, label: 'Age'},

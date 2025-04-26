@@ -15,7 +15,7 @@
 <link rel="modulepreload" href="./_observablehq/client.1d3a0af6.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.82806664.js">
-<link rel="modulepreload" href="./_import/components/example.e1f3c80f.js">
+<link rel="modulepreload" href="./_import/components/example.8c3b1c2e.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.6ba3de0b.js">
 <link rel="modulepreload" href="./_node/@observablehq/plot@0.6.17/index.28168f6d.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
@@ -64,10 +64,10 @@
 import {define} from "./_observablehq/client.1d3a0af6.js";
 import {registerFile} from "./_observablehq/stdlib.82806664.js";
 
-registerFile("./data/lifestyle.csv", {"name":"./data/lifestyle.csv","mimeType":"text/csv","path":"./_file/data/lifestyle.943614fa.csv","lastModified":1745685201153,"size":146034});
+registerFile("./data/lifestyle.csv", {"name":"./data/lifestyle.csv","mimeType":"text/csv","path":"./_file/data/lifestyle.943614fa.csv","lastModified":1745685416875,"size":146034});
 
 define({id: "686a4235", outputs: ["Timeline","Gender","Age","Importance","Importance_Slider","Inputs"], body: async () => {
-const [{Timeline, Gender, Age, Importance, Importance_Slider}, Inputs] = await Promise.all([import("./_import/components/example.e1f3c80f.js"), import("./_observablehq/stdlib/inputs.6ba3de0b.js")]);
+const [{Timeline, Gender, Age, Importance, Importance_Slider}, Inputs] = await Promise.all([import("./_import/components/example.8c3b1c2e.js"), import("./_observablehq/stdlib/inputs.6ba3de0b.js")]);
 
 return {Timeline,Gender,Age,Importance,Importance_Slider,Inputs};
 }});
@@ -77,7 +77,9 @@ const lifestyle_data = FileAttachment("./data/lifestyle.csv").csv();
 return {lifestyle_data};
 }});
 
-define({id: "333f9eff", inputs: ["view","Gender","Age"], outputs: ["gender","age"], body: (view,Gender,Age) => {
+define({id: "a8f4cef5", inputs: ["view","Gender","Age"], outputs: ["gender","age"], body: (view,Gender,Age) => {
+// Create the input like, this. First create a viewable object with view() and then use the viewable object to create the input.
+// This way the other cells react when the value of the input changes.
 const gender = view(Gender())
 const age = view(Age())
 gender
@@ -91,7 +93,8 @@ importance_input
 return {importance_input};
 }});
 
-define({id: "1781f25e", inputs: ["view","Importance","lifestyle_data","gender","age","importance_input"], outputs: ["importance_graph"], body: (view,Importance,lifestyle_data,gender,age,importance_input) => {
+define({id: "38f1d87b", inputs: ["view","Importance","lifestyle_data","gender","age","importance_input"], outputs: ["importance_graph"], body: (view,Importance,lifestyle_data,gender,age,importance_input) => {
+// Like the input, create a viewable object first and then use it to create the chart. That way it reacts to changes from the input
 const importance_graph = view(Importance(lifestyle_data, gender, age, importance_input))
 importance_graph
 return {importance_graph};
@@ -119,7 +122,7 @@ These charts are here to give you perspective, spark motivation, and help you se
 <div class="observablehq observablehq--block"><!--:686a4235:--></div>
 <div class="observablehq observablehq--block"><!--:e972efff:--></div>
 <h2 id="first-things-first-let-us-know-who-you-are" tabindex="-1"><a class="observablehq-header-anchor" href="#first-things-first-let-us-know-who-you-are">First things first, let us know who you are!</a></h2>
-<div class="observablehq observablehq--block"><!--:333f9eff:--></div>
+<div class="observablehq observablehq--block"><!--:a8f4cef5:--></div>
 <h2 id="how-important-is-exercise" tabindex="-1"><a class="observablehq-header-anchor" href="#how-important-is-exercise">How important is exercise?</a></h2>
 <p>In this chart, you'll find the average importance people place on exercise, divided by age groups and gender.
 Participants rated how vital working out is to their lives on a scale from 0 (not important) to 5 (extremely important).
@@ -128,10 +131,10 @@ Now it's your turn: use the slider to share how important exercise is to you per
 As you move the slider, a dot will appear on the chart, showing exactly where you stand compared to the average in your demographic.
 Take a moment to explore — are you more motivated than most? Or is there inspiration waiting for you?</p>
 <div class="observablehq observablehq--block"><!--:d9cab093:--></div>
-<div class="observablehq observablehq--block"><!--:1781f25e:--></div>
+<div class="observablehq observablehq--block"><!--:38f1d87b:--></div>
 </main>
 <footer id="observablehq-footer">
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-26T16:33:29">Apr 26, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-26T16:37:06">Apr 26, 2025</a>.</div>
 </footer>
 </div>
 </body>
