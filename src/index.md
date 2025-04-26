@@ -15,6 +15,8 @@ const lifestyle_data = FileAttachment("./data/lifestyle.csv").csv();
 ## First things first, let us know who you are!
 
 ```js
+// Create the input like, this. First create a viewable object with view() and then use the viewable object to create the input.
+// This way the other cells react when the value of the input changes.
 const gender = view(Gender())
 const age = view(Age())
 gender
@@ -37,6 +39,7 @@ importance_input
 
 
 ```js
+// Like the input, create a viewable object first and then use it to create the chart. That way it reacts to changes from the input
 const importance_graph = view(Importance(lifestyle_data, gender, age, importance_input))
 importance_graph
 ```
