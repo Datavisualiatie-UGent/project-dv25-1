@@ -20,19 +20,38 @@ function convertDateToInterval(date) {
 }
 
 // Use the Inputs module as needed
-export function Importance(data, genderInput, ageInput) {
-    let interval = convertDateToInterval(ageInput.value);
-    // console.log(data.length);
-    // data = data.filter(row => row.gender === gender && row.age === interval);
-    // console.log(data.length);
+export function Importance(data, user_gender, user_age, user_importance) {
+    let interval = convertDateToInterval(user_age);
+
     let data_processed = data.map(row => ({
         age: row.age,
         gender: row.gender,
         how_important: row.how_important
     }));
 
-    let user_data = [{age: interval, gender: genderInput.value, how_important: 3, title: "You are here"}];
+    let data_filtered = data_processed.filter(row => row.age === interval && row.gender === user_gender);
+    let mean = data_filtered.reduce((acc, row) => acc + Number(row.how_important), 0) / data_filtered.length;
 
+    let title;
+    if (isNaN(mean)) {
+        title = ""
+    } else if (user_importance < mean) {
+        if (user_gender === "Male") {
+            title = "Seems like exercise is less important to you then other men your age";
+        } else {
+            title = "Seems like exercise is less important to you then other women your age";
+        }
+    } else {
+        if (user_gender === "Male") {
+            title = "Seems like exercise is more important to you then other men your age";
+        } else {
+            title = "Seems like exercise is more important to you then other women your age";
+        }
+    }
+
+    let user_data = [{age: interval, gender: user_gender, how_important: user_importance, title: title}];
+
+    console.log(user_data);
     return Plot.plot({
         marginBottom: 40,
         fx: {padding: 0, label: 'Age'},
@@ -68,20 +87,24 @@ export function Importance(data, genderInput, ageInput) {
     })
 }
 
-export function setGender() {
+export function Gender() {
     return Inputs.radio(["Male", "Female"], {
         label: "Choose your Character:",
         value: "Male"
     })
 }
 
-export function setAge() {
-    return Inputs.date({
+export function Age() {
+    return (Inputs.date({
         label: "When were you born?",
         min: new Date(new Date().setFullYear(new Date().getFullYear() - 100)).toISOString().split("T")[0],
-        max: new Date().toISOString().split("T")[0],
-        value: new Date().toISOString().split("T")[0]
-    })
+        max: new Date(new Date().setFullYear(new Date().getFullYear() - 15)).toISOString().split("T")[0],
+        value: new Date(new Date().setFullYear(new Date().getFullYear() - 15)).toISOString().split("T")[0],
+    }))
+}
+
+export function Importance_Slider() {
+    return Inputs.range([0, 5], {label: "How important is workout out for you?", step: .1})
 }
 
 // export function
