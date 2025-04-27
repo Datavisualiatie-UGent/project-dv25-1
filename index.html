@@ -15,7 +15,7 @@
 <link rel="modulepreload" href="./_observablehq/client.1d3a0af6.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.82806664.js">
-<link rel="modulepreload" href="./_import/components/example.8c3b1c2e.js">
+<link rel="modulepreload" href="./_import/components/example.5dfb32b9.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.6ba3de0b.js">
 <link rel="modulepreload" href="./_node/@observablehq/plot@0.6.17/index.28168f6d.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
@@ -64,12 +64,12 @@
 import {define} from "./_observablehq/client.1d3a0af6.js";
 import {registerFile} from "./_observablehq/stdlib.82806664.js";
 
-registerFile("./data/lifestyle.csv", {"name":"./data/lifestyle.csv","mimeType":"text/csv","path":"./_file/data/lifestyle.943614fa.csv","lastModified":1745685416875,"size":146034});
+registerFile("./data/lifestyle.csv", {"name":"./data/lifestyle.csv","mimeType":"text/csv","path":"./_file/data/lifestyle.943614fa.csv","lastModified":1745793234523,"size":146034});
 
-define({id: "686a4235", outputs: ["Timeline","Gender","Age","Importance","Importance_Slider","Inputs"], body: async () => {
-const [{Timeline, Gender, Age, Importance, Importance_Slider}, Inputs] = await Promise.all([import("./_import/components/example.8c3b1c2e.js"), import("./_observablehq/stdlib/inputs.6ba3de0b.js")]);
+define({id: "2094fcca", outputs: ["Timeline","Gender","Age","Importance","Importance_Slider","Healthy","Moment","Length","Healthy_Slider","Inputs"], body: async () => {
+const [{Timeline, Gender, Age, Importance, Importance_Slider, Healthy, Moment, Length, Healthy_Slider}, Inputs] = await Promise.all([import("./_import/components/example.5dfb32b9.js"), import("./_observablehq/stdlib/inputs.6ba3de0b.js")]);
 
-return {Timeline,Gender,Age,Importance,Importance_Slider,Inputs};
+return {Timeline,Gender,Age,Importance,Importance_Slider,Healthy,Moment,Length,Healthy_Slider,Inputs};
 }});
 
 define({id: "e972efff", inputs: ["FileAttachment"], outputs: ["lifestyle_data"], body: (FileAttachment) => {
@@ -100,6 +100,23 @@ importance_graph
 return {importance_graph};
 }});
 
+define({id: "b4671c97", inputs: ["view","Moment","Length","Healthy_Slider"], outputs: ["moment","length","healthy_slider"], body: (view,Moment,Length,Healthy_Slider) => {
+const moment = view(Moment())
+const length = view(Length())
+const healthy_slider = view(Healthy_Slider())
+moment
+length
+healthy_slider
+return {moment,length,healthy_slider};
+}});
+
+define({id: "6e67ca38", inputs: ["view","Healthy","lifestyle_data","moment","length","healthy_slider"], outputs: ["healthy_graph"], body: (view,Healthy,lifestyle_data,moment,length,healthy_slider) => {
+const healthy_graph = view(Healthy(lifestyle_data, moment, length, healthy_slider))
+healthy_graph
+
+return {healthy_graph};
+}});
+
 </script>
 </head>
 <body>
@@ -110,6 +127,7 @@ return {importance_graph};
 <ol>
 <li class="observablehq-secondary-link"><a href="#first-things-first-let-us-know-who-you-are">First things first, let us know who you are!</a></li>
 <li class="observablehq-secondary-link"><a href="#how-important-is-exercise">How important is exercise?</a></li>
+<li class="observablehq-secondary-link"><a href="#how-much-and-often-do-you-need-to-exercise-to-be-healthy">How much and often do you need to exercise to be healthy?</a></li>
 </ol>
 </nav>
 </aside>
@@ -119,7 +137,7 @@ return {importance_graph};
 <p>This page brings together workout and lifestyle data from people just like you — visualized to reveal patterns, habits, and healthy trends.
 Curious how often others hit the gym? How much they sleep? Where you shine or where there’s room to grow?
 These charts are here to give you perspective, spark motivation, and help you set your next big goal. Let’s turn insight into action!</p>
-<div class="observablehq observablehq--block"><!--:686a4235:--></div>
+<div class="observablehq observablehq--block"><!--:2094fcca:--></div>
 <div class="observablehq observablehq--block"><!--:e972efff:--></div>
 <h2 id="first-things-first-let-us-know-who-you-are" tabindex="-1"><a class="observablehq-header-anchor" href="#first-things-first-let-us-know-who-you-are">First things first, let us know who you are!</a></h2>
 <div class="observablehq observablehq--block"><!--:a8f4cef5:--></div>
@@ -132,9 +150,16 @@ As you move the slider, a dot will appear on the chart, showing exactly where yo
 Take a moment to explore — are you more motivated than most? Or is there inspiration waiting for you?</p>
 <div class="observablehq observablehq--block"><!--:d9cab093:--></div>
 <div class="observablehq observablehq--block"><!--:38f1d87b:--></div>
+<h2 id="how-much-and-often-do-you-need-to-exercise-to-be-healthy" tabindex="-1"><a class="observablehq-header-anchor" href="#how-much-and-often-do-you-need-to-exercise-to-be-healthy">How much and often do you need to exercise to be healthy?</a></h2>
+<p><strong>How healthy do you feel compared to others?</strong><br>
+This graph shows how healthy people consider themselves based on how often and how long they work out.<br>
+You can select your own workout time, duration, and how healthy you feel using the options below.<br>
+Your personal input will be shown as a dot on the heatmap, so you can easily see how you compare to others!</p>
+<div class="observablehq observablehq--block"><!--:b4671c97:--></div>
+<div class="observablehq observablehq--block"><!--:6e67ca38:--></div>
 </main>
 <footer id="observablehq-footer">
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-26T16:37:06">Apr 26, 2025</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2025-04-27T22:34:02">Apr 27, 2025</a>.</div>
 </footer>
 </div>
 </body>
