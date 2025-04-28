@@ -5,9 +5,10 @@ Curious how often others hit the gym? How much they sleep? Where you shine or wh
 These charts are here to give you perspective, spark motivation, and help you set your next big goal. Let’s turn insight into action!
 
 ```js
-import {Timeline, Gender, Age, Importance, Importance_Slider, Healthy, Moment, Length, Healthy_Slider} from "./components/example.js";
+import {Timeline, Gender, Age, Importance, Importance_Slider, Healthy, Moment, Length, Healthy_Slider, Accompaniment, Accompaniment_length_health} from "./components/example.js";
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "./components/barrier_buster.js";
 import { md } from "@observablehq/stdlib";
+
 import * as Inputs from "npm:@observablehq/inputs";
 ```
 
@@ -69,6 +70,23 @@ healthy_graph
 
 ```
 
+## How much does exercising with others increase exercise time per day?
+
+**With whom do you exercise?**
+Are you a social bird when it comes to exercise, or do you prefer to go at it alone?
+This graph shows how much this could influence your exercise time per day.
+You can select the values that correspond to you, and we will show you your standings compared to other people.
+
+```js
+const accompaniment = view(Accompaniment())
+accompaniment
+```
+
+```js
+const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, accompaniment, length))
+accompaniment_graph
+```
+
 ## Barrier Buster: Find Your Motivation
 
 Everyone faces challenges on their fitness journey. What's holding you back from exercising more regularly?
@@ -88,3 +106,5 @@ barrier_graph
 ```js
 const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
+
+

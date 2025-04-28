@@ -172,3 +172,60 @@ export function Healthy(data, moment, length, healthy_slider) {
         ]
     });
 }
+
+
+export function Accompaniment() {
+    return Inputs.radio(["I don't really exercise", "Alone", "With a friend", "With a group", "Within a class environment"], {
+        label: "With whom do you exercise?",
+        value: "Alone"
+    })
+}
+
+
+export function Accompaniment_length_health(data, accompaniment, length, healthy_slider) {
+    let data_length = data.length;
+    
+    let skip = "I don't really exercise";
+
+    let data_processed = data.map(row => ({
+        accompaniment: row.with_who,
+        length: row.exercise_length,
+        healthy: row.how_healthy
+    }));
+
+    const userInput = {
+        moment: accompaniment,
+        length: length,
+        healthy: healthy_slider
+    }
+
+    const accompaniment_order = [skip, "Alone", "With a friend", "With a group", "Within a class environment"];
+    const length_order = [skip, "30 minutes", "1 hour", "2 hours", "3 hours and above"];
+
+    return Plot.plot({
+        marginLeft: 120,
+        padding: 0,
+        x: {domain: accompaniment_order},
+        y: {domain: length_order},
+        color: {legend: true, zero: true},
+        marks: [
+            Plot.cell(
+                data_processed,
+                Plot.group(
+                    {fill: "count"},
+                    {x: d => d.accompaniment, y: d => d.length, inset: 0.5}
+                )
+            ),
+            Plot.dot(
+                [userInput],
+                {
+                    x: d => d.moment,
+                    y: d => d.length,
+                    stroke: "black",  // Outline the dot to make it pop
+                    fill: "black", // To make it stand out
+                    r: 8 // radius of the dot
+                }
+            )
+        ]
+    });
+}
