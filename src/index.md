@@ -6,6 +6,8 @@ These charts are here to give you perspective, spark motivation, and help you se
 
 ```js
 import {Timeline, Gender, Age, Importance, Importance_Slider, Healthy, Moment, Length, Healthy_Slider} from "./components/example.js";
+import {BarrierSelect, BarrierBuster, BarrierInsight} from "./components/barrier_buster.js";
+import { md } from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
 
@@ -65,4 +67,24 @@ healthy_slider
 const healthy_graph = view(Healthy(lifestyle_data, moment, length, healthy_slider))
 healthy_graph
 
+```
+
+## Barrier Buster: Find Your Motivation
+
+Everyone faces challenges on their fitness journey. What's holding you back from exercising more regularly?
+Select the barrier that resonates most with you, and discover what motivates others who face the same challenge.
+This visualization reveals the common motivations that drive people past similar obstacles - helping you find the spark that might work for you too.
+
+```js
+const barrier = view(BarrierSelect())
+barrier
+```
+
+```js
+const barrier_graph = view(BarrierBuster(lifestyle_data, barrier))
+barrier_graph
+```
+
+```js
+const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
