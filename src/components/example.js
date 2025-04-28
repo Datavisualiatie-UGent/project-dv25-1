@@ -182,7 +182,7 @@ export function Accompaniment() {
 }
 
 
-export function Accompaniment_length_health(data, accompaniment, length, healthy_slider) {
+export function Accompaniment_length_health(data, accompaniment, length) {
     let data_length = data.length;
     
     let skip = "I don't really exercise";
@@ -190,42 +190,31 @@ export function Accompaniment_length_health(data, accompaniment, length, healthy
     let data_processed = data.map(row => ({
         accompaniment: row.with_who,
         length: row.exercise_length,
-        healthy: row.how_healthy
     }));
 
     const userInput = {
-        moment: accompaniment,
+        accompaniment: accompaniment,
         length: length,
-        healthy: healthy_slider
     }
 
     const accompaniment_order = [skip, "Alone", "With a friend", "With a group", "Within a class environment"];
     const length_order = [skip, "30 minutes", "1 hour", "2 hours", "3 hours and above"];
 
+    const y_bars = [];
+    for (let i = 0; i < accompaniment_order.length; i++) {
+        const accompaniment = accompaniment_order[i];
+        y_bars.push(Plot.barY(
+            data_processed.filter(x => x.accompaniment == accompaniment).toSorted((x, y) => length_order.findIndex(a => a == x.length) - length_order.findIndex(a => a == y.length)),
+            Plot.groupX({y: "proportion"}, {x: "accompaniment", fill: "length"})
+        ));
+    }
+    
     return Plot.plot({
         marginLeft: 120,
         padding: 0,
         x: {domain: accompaniment_order},
-        y: {domain: length_order},
-        color: {legend: true, zero: true},
-        marks: [
-            Plot.cell(
-                data_processed,
-                Plot.group(
-                    {fill: "count"},
-                    {x: d => d.accompaniment, y: d => d.length, inset: 0.5}
-                )
-            ),
-            Plot.dot(
-                [userInput],
-                {
-                    x: d => d.moment,
-                    y: d => d.length,
-                    stroke: "black",  // Outline the dot to make it pop
-                    fill: "black", // To make it stand out
-                    r: 8 // radius of the dot
-                }
-            )
-        ]
+        y: {grid: true},
+        color: {legend: true},
+        marks: y_bars
     });
 }
