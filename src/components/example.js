@@ -183,8 +183,6 @@ export function Accompaniment() {
 
 
 export function Accompaniment_length_health(data, accompaniment, length) {
-    let data_length = data.length;
-    
     let skip = "I don't really exercise";
 
     let data_processed = data.map(row => ({
@@ -204,7 +202,7 @@ export function Accompaniment_length_health(data, accompaniment, length) {
     for (let i = 0; i < accompaniment_order.length; i++) {
         const accompaniment = accompaniment_order[i];
         y_bars.push(Plot.barY(
-            data_processed.filter(x => x.accompaniment == accompaniment).toSorted((x, y) => length_order.findIndex(a => a == x.length) - length_order.findIndex(a => a == y.length)),
+            data_processed.filter(x => x.accompaniment == accompaniment).toSorted((x, y) => length_order.indexOf(x.length) - length_order.indexOf(y.length)),
             Plot.groupX({y: "proportion"}, {x: "accompaniment", fill: "length"})
         ));
     }
@@ -214,7 +212,7 @@ export function Accompaniment_length_health(data, accompaniment, length) {
         padding: 0,
         x: {domain: accompaniment_order},
         y: {grid: true},
-        color: {legend: true},
+        color: {legend: true, domain: length_order},
         marks: y_bars
     });
 }

@@ -70,9 +70,10 @@ healthy_graph
 
 ```
 
-## How much does exercising with others increase exercise time per day?
+## A company a day keeps the laziness away
 
 **With whom do you exercise?**
+
 Are you a social bird when it comes to exercise, or do you prefer to go at it alone?
 This graph shows how much this could influence your exercise time per day.
 You can select the values that correspond to you, and we will show you your standings compared to other people.
