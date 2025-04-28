@@ -1,17 +1,22 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages # You can rename this if you prefer
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch: # Added optional manual trigger (like in the working example)
 
-permissions:
-  contents: write
+# Permissions are now defined per job for better security practice
+# permissions:
+#  contents: write
 
 jobs:
-  deploy:
+  # Build job: builds site and uploads artifact
+  build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read # Permission needed to checkout the repository
+      # Add 'contents: write' if npm ci needs to write (e.g., for certain git dependencies)
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,16 +24,36 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '23.9'
+          node-version: '23.9' # Keeping your specified version
+          cache: 'npm'        # Added caching like in the working example
 
       - name: Install Dependencies
         run: npm ci
 
       - name: Build Observable Framework
         run: npm run build
+        # Add error checking here if needed: e.g., check if 'dist' directory exists and has content
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # Use the official upload action
         with:
-          branch: gh-pages
-          folder: dist
+          # Upload entire repository build output from the 'dist' folder
+          path: ./dist
+
+  # Deploy job: retrieves artifact and deploys to GitHub Pages
+  deploy:
+    needs: build # Run only after the build job is successful
+
+    permissions:
+      pages: write      # Required to deploy to GitHub Pages
+      id-token: write   # Required for authentication using OIDC
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }} # Output the URL of the deployed site
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Use the official deploy action
