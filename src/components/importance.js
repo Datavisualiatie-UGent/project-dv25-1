@@ -49,7 +49,16 @@ export function Importance(data, user_gender, user_age, user_importance) {
             type: "ordinal",
             domain: ["user", 1, 2, 3, 4, 5],
             range: ["red", "#440154", "#3b528b", "#21918c", "#5ec962", "#fde725"],
-            label: "Importance Level"
+            label: "Importance Level",
+            tickFormat: d => ({
+                user: "Your choice",
+                1: "Not important",
+                2: "Slightly important",
+                3: "Moderately important",
+                4: "Very important",
+                5: "Extremely important"
+            }[d])
+
         },
         marks: [
             Plot.barY(bar_data, {
