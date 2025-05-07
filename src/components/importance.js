@@ -19,18 +19,69 @@ function convertDateToInterval(date) {
     }
 }
 
+function extract_importance_absolute_frequency(data_processed) {
+    let total_count_female = 0;
+    let total_count_male = 0;
+
+    const array_male = new Array(5).fill(0); // Male
+    const array_female = new Array(5).fill(0); // Female
+
+
+    for (let i = 1; i <= 5; i++) {
+        let count_male = 0;
+        let count_female = 0;
+
+        data_processed.forEach(row => {
+            if (row.how_important === String(i) && row.gender === "Female") {
+                count_female++;
+            }
+            if (row.how_important === String(i) && row.gender === "Male") {
+                count_male++;
+            }
+        })
+
+        array_female[i - 1] = count_female;
+        array_male[i - 1] = count_male;
+
+        total_count_female += count_female;
+        total_count_male += count_male;
+    }
+
+    return [array_female.map((x) => x / total_count_female * 100), array_male.map((x) => x / total_count_male * 100)];
+}
+
 // Use the Inputs module as needed
 export function Importance(data, user_gender, user_age, user_importance) {
     let interval = convertDateToInterval(user_age);
+    let user_data = [{age: interval, gender: user_gender, how_important: user_importance}];
 
     // Processing the data makes it easier to plot it
     let data_processed = data.map(row => ({
-        age: row.age,
         gender: row.gender,
         how_important: row.how_important
     }));
 
-    let data_filtered = data_processed.filter(row => row.age === interval && row.gender === user_gender);
+    // Calculate importance for female
+    let [array_female, array_male] = extract_importance_absolute_frequency(data_processed);
+
+    return Plot.plot({
+        marginBottom: 100,
+        fx: {padding: 0, label: null, tickRotate: 90, tickSize: 6},
+        x: {axis: null, paddingOuter: 0.2, type: "band"},
+        y: {grid: true},
+        color: {legend: true, type: "ordinal", scheme: "viridis"},
+        marks: [
+            Plot.barY(
+                data_processed,
+                Plot.groupX(
+                    {y2: "count"},
+                    {x: "how_important", fx: "gender", fill: "how_important"}
+                )
+            ),
+        ]
+    });
+
+    let data_filtered = data_processed.filter(row.gender === user_gender);
     let mean = data_filtered.reduce((acc, row) => acc + Number(row.how_important), 0) / data_filtered.length;
 
     let title;
@@ -50,7 +101,6 @@ export function Importance(data, user_gender, user_age, user_importance) {
         }
     }
 
-    let user_data = [{age: interval, gender: user_gender, how_important: user_importance, title: title}];
 
 
     return Plot.plot({
@@ -76,17 +126,18 @@ export function Importance(data, user_gender, user_age, user_importance) {
                     },
                 )
             ),
-            Plot.dot(user_data, {
-                x: "gender",
-                fx: "age",
-                y: "how_important",
-                fill: "red", // or a standout color
-                r: 10,          // size of the dot,
-                title: "title",
-            }),
-            Plot.ruleY([0]),
         ]
     })
+
+    // Plot.dot(user_data, {
+    //     x: "gender",
+    //     fx: "age",
+    //     y: "how_important",
+    //     fill: "red", // or a standout color
+    //     r: 10,          // size of the dot,
+    //     title: "title",
+    // }),
+    //     Plot.ruleY([0]),
 }
 
 export function Importance_Slider() {
