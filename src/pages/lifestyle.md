@@ -32,6 +32,7 @@ Take a moment to explore — are you more motivated than most? Or is there inspi
 
 ```js
 const importance_input = view(Importance_Slider(gender))
+// const importance_input = (Importance_Slider(gender))
 importance_input
 ```
 
