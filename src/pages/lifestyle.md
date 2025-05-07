@@ -2,7 +2,7 @@
 import {Gender, Age} from "../components/gender_age_input.js";
 import {Importance, Importance_Slider} from "../components/importance.js";
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrier_buster.js";
-import {Moment, Length, Healthy, Healthy_Slider} from "../components/health.js";
+import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
 import {md} from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
@@ -32,7 +32,6 @@ Take a moment to explore — are you more motivated than most? Or is there inspi
 
 ```js
 const importance_input = view(Importance_Slider(gender))
-// const importance_input = (Importance_Slider(gender))
 importance_input
 ```
 
@@ -63,7 +62,14 @@ healthy_slider
 ```js
 const healthy_graph = view(Healthy(lifestyle_data, moment, length, healthy_slider))
 healthy_graph
+```
 
+## Fun fact
+Nobody works out in the afternoon
+
+```js
+const workout_moment = view(WorkoutMoment(lifestyle_data))
+workout_moment
 ```
 
 ## Barrier Buster: Find Your Motivation

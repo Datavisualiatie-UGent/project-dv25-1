@@ -74,9 +74,6 @@ export function Importance(data, user_gender, user_age, user_importance) {
     });
 }
 
-
-
-
 export function Importance_Slider() {
     return Inputs.range([1, 5], {label: "How important is workout out for you?", step: 1})
 }
