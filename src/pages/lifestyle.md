@@ -3,6 +3,7 @@ import {Gender, Age} from "../components/gender_age_input.js";
 import {Importance, Importance_Slider} from "../components/importance.js";
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrier_buster.js";
 import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
+import {Diet_radar} from "../components/diet_radar.js";
 import {md} from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
@@ -92,3 +93,17 @@ barrier_graph
 // const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
 
+## Food: your worst enemy
+
+```js
+const diet_radar = view(Diet_radar(lifestyle_data))
+lifestyle_data
+```
+
+```html
+<style>
+          g[aria-label=area] path {fill-opacity: 0.1; transition: fill-opacity .2s;}
+          g[aria-label=area]:hover path:not(:hover) {fill-opacity: 0.05; transition: fill-opacity .2s;}
+          g[aria-label=area] path:hover {fill-opacity: 0.3; transition: fill-opacity .2s;}
+</style>
+```

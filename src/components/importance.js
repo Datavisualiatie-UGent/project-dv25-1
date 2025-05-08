@@ -32,13 +32,10 @@ export function Importance(data, user_gender, user_age, user_importance) {
             gender,
             how_important,
             count,
-            fill: gender === user_data.gender && how_important === user_data.how_important
-                ? "user"
-                : how_important
+            fill: how_important
         }))
     );
 
-    // Render the plot
     return Plot.plot({
         marginBottom: 100,
         fx: {padding: 0, label: null, tickRotate: 0, tickSize: 6},
@@ -47,31 +44,47 @@ export function Importance(data, user_gender, user_age, user_importance) {
         color: {
             legend: true,
             type: "ordinal",
-            domain: ["user", 1, 2, 3, 4, 5],
-            range: ["red", "#440154", "#3b528b", "#21918c", "#5ec962", "#fde725"],
+            domain: [1, 2, 3, 4, 5],
+            range: ["#440154", "#3b528b", "#21918c", "#5ec962", "#fde725"],
             label: "Importance Level",
             tickFormat: d => ({
-                user: "Your choice",
                 1: "Not important",
                 2: "Slightly important",
                 3: "Moderately important",
                 4: "Very important",
                 5: "Extremely important"
             }[d])
-
         },
         marks: [
+            // Base bars
             Plot.barY(bar_data, {
                 x: "how_important",
                 fx: "gender",
                 y: "count",
-                fill: "fill",
+                fill: "fill", // fill is either 1-5 or "user"
                 inset: 1,
                 title: d => `${d.gender}, importance ${d.how_important}: ${d.count} responses`
             }),
+
+            // Red border only for user bar
+            Plot.barY(
+                bar_data.filter(d => d.gender === user_gender && d.how_important === user_importance),
+                {
+                    x: "how_important",
+                    fx: "gender",
+                    y: "count",
+                    stroke: "red",
+                    strokeWidth: 2,
+                    fillOpacity: 1,
+                    inset: 1
+                }
+            ),
+
             Plot.ruleY([0])
         ]
     });
+
+
 }
 
 export function Importance_Slider() {
