@@ -87,9 +87,31 @@ export function Diet_radar(data) {
     const obj_30_40 = Object.fromEntries(map_30_40_percentage);
     const obj_40 = Object.fromEntries(map_40_percentage);
 
-    let phones = [
-        obj_15_18, obj_19_25, obj_26_30, obj_30_40, obj_40
-    ];
+    const all_barriers = Array.from(filtered_map.keys());
+    const age_groups = ["15 to 18", "19 to 25", "26 to 30", "30 to 40", "40 and above"];
+
+    // All age group maps
+    const age_maps = {
+        "15 to 18": obj_15_18,
+        "19 to 25": obj_19_25,
+        "26 to 30": obj_26_30,
+        "30 to 40": obj_30_40,
+        "40 and above": obj_40
+    };
+
+    // Final reversed structure
+    const phones = all_barriers.map(barrier => {
+        const entry = { name: barrier };
+        for (const age of age_groups) {
+            entry[age] = age_maps[age][barrier] ?? 0;
+        }
+        return entry;
+    });
+
+
+    // let phones = [
+    //     obj_15_18, obj_19_25, obj_26_30, obj_30_40, obj_40
+    // ];
 
     console.log(phones);
 
@@ -100,7 +122,8 @@ export function Diet_radar(data) {
     let longitude = d3.scalePoint(new Set(Plot.valueof(points, "key")), [180, -180]).padding(0.5).align(1)
 
     return Plot.plot({
-        width: 450,
+        width: 600,
+        margin: 20,
         projection: {
             type: "azimuthal-equidistant",
             rotate: [0, -90],
@@ -110,7 +133,7 @@ export function Diet_radar(data) {
         color: { legend: true },
         marks: [
             // grey discs
-            Plot.geo([0.5, 0.4, 0.3, 0.2, 0.1], {
+            Plot.geo([0.6, 0.5, 0.4, 0.3, 0.2, 0.1], {
                 geometry: (r) => d3.geoCircle().center([0, 90]).radius(r)(),
                 stroke: "black",
                 fill: "black",
@@ -122,7 +145,7 @@ export function Diet_radar(data) {
             // white axes
             Plot.link(longitude.domain(), {
                 x1: longitude,
-                y1: 90 - 0.57,
+                y1: 90 - 0.6,
                 x2: 0,
                 y2: 90,
                 strokeOpacity: 0.5,
@@ -130,7 +153,7 @@ export function Diet_radar(data) {
             }),
 
             // tick labels
-            Plot.text([0.3, 0.4, 0.5], {
+            Plot.text([0.3, 0.4, 0.5, 0.6], {
                 x: 180,
                 y: (d) => 90 - d,
                 dx: 2,
@@ -143,7 +166,7 @@ export function Diet_radar(data) {
             // axes labels
             Plot.text(longitude.domain(), {
                 x: longitude,
-                y: 90 - 0.57,
+                y: 90 - 0.65,
                 text: Plot.identity,
                 lineWidth: 5
             }),
