@@ -1,0 +1,39 @@
+# Gym habits
+
+```js
+import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
+import { BurnScatterPlot } from "../components/burn_scatter_plot.js";
+```
+
+```js
+const gym_data = FileAttachment("../data/gym_data.csv").csv();
+```
+
+## Understanding Your Heart 🫀: The Foundation of Effective Workouts
+
+Before diving into specific workout strategies, let's look at some fundamental indicators of cardiovascular response to exercise: heart rates. 
+This boxplot visualization displays the distribution of Resting, Average (during exercise), and Maximum heart rates across our dataset.
+
+```js
+const heart_rate_box_plots = view(createHeartRateBoxPlots(gym_data));
+heart_rate_box_plots
+```
+
+## Maximizing Your Burn 🔥: Which Workouts Deliver and For How Long?
+
+A common goal for many is maximizing calorie expenditure. But how do different workout types stack up, and how does duration play a role?
+
+```js
+const burn_scatter_plot = view(BurnScatterPlot(gym_data));
+burn_scatter_plot
+```
+
+Here's some encouraging news: the duration of your workout is a powerful lever for increasing calorie burn! 
+Since this relationship holds true across different exercise types, you don't have to push through a workout you simply think burns more; 
+instead, choose an activity you genuinely enjoy, as dedicating more time to it will effectively boost your calorie expenditure and help you stay consistent.
+
+## The Long Game ⏱️: How Experience and Frequency Shape Results
+
+We often hear that "consistency is key." But how do workout frequency and prior experience interact to influence body composition metrics like body fat percentage or BMI?
+
+

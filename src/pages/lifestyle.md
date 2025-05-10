@@ -1,6 +1,7 @@
 ```js
 import {Gender, Age} from "../components/gender_age_input.js";
 import {Importance, Importance_Slider} from "../components/importance.js";
+import {Accompaniment, Accompaniment_length_health} from "../components/accompaniment.js";
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrier_buster.js";
 import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
 import {Diet_radar} from "../components/diet_radar.js";
@@ -71,6 +72,24 @@ Nobody works out in the afternoon
 ```js
 const workout_moment = view(WorkoutMoment(lifestyle_data))
 workout_moment
+```
+
+## A company a day keeps the laziness away
+
+**With whom do you exercise?**
+
+Are you a social bird when it comes to exercise, or do you prefer to go at it alone?
+This graph shows how much this could influence your exercise time per day.
+You can select the values that correspond to you, and we will show you your standings compared to other people.
+
+```js
+const accompaniment = view(Accompaniment())
+accompaniment
+```
+
+```js
+const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, accompaniment, length))
+accompaniment_graph
 ```
 
 ## Barrier Buster: Find Your Motivation
