@@ -12,7 +12,7 @@ export function createHeartRateBoxPlots(data) {
         y: {
             grid: true,
             label: "Heart Rate (bpm)",
-            reverse: true,
+            reverse: false,
             domain: [40, 210],
         },
         x: {
