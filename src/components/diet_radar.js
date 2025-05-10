@@ -90,6 +90,8 @@ export function Diet_radar(data) {
     const all_barriers = Array.from(filtered_map.keys());
     const age_groups = ["15 to 18", "19 to 25", "26 to 30", "30 to 40", "40 and above"];
 
+    console.log()
+
     // All age group maps
     const age_maps = {
         "15 to 18": obj_15_18,

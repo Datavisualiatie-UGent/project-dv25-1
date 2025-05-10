@@ -4,6 +4,7 @@ import {Importance, Importance_Slider} from "../components/importance.js";
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrier_buster.js";
 import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
 import {Diet_radar} from "../components/diet_radar.js";
+import {diet_barriers_chart} from "../components/diet_barriers_chart.js";
 import {md} from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
@@ -106,4 +107,11 @@ lifestyle_data
           g[aria-label=area]:hover path:not(:hover) {fill-opacity: 0.05; transition: fill-opacity .2s;}
           g[aria-label=area] path:hover {fill-opacity: 0.3; transition: fill-opacity .2s;}
 </style>
+```
+
+## Food: your worster enemy
+
+```js
+const diet_chart = view(diet_barriers_chart(lifestyle_data))
+diet_chart
 ```
