@@ -1,5 +1,23 @@
 import * as d3 from "d3";
 
+function convertDateToInterval(date) {
+    const dateObj = new Date(date);
+    const currentDate = new Date();
+
+    const diffYears = Math.abs(currentDate.getFullYear() - dateObj.getFullYear());
+    if (diffYears < 19) {
+        return "15 to 18";
+    } else if (diffYears < 26) {
+        return "19 to 25";
+    } else if (diffYears < 31) {
+        return "26 to 30";
+    } else if (diffYears < 41) {
+        return "30 to 40";
+    } else {
+        return "40 and above";
+    }
+}
+
 function setup_map_with_all_barriers_as_key(data) {
     // Pre-process the data
     let map = new Map();
@@ -27,6 +45,7 @@ export function diet_barriers_chart(data, age, user_age) {
 
     let general_map = setup_map_with_all_barriers_as_key(data);
     let options = Array.from(general_map.keys());
+    const user_age_group = convertDateToInterval(user_age);
 
     let data_15_18 = data.filter(d => d.age === age);
 
@@ -75,6 +94,21 @@ export function diet_barriers_chart(data, age, user_age) {
         .attr("height", height)
         .attr("viewBox", [-width / 2, -height / 2, width, height])
         .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;"); // ⬅️ smaller text
+
+    if (user_age_group === age) {
+        const highlightArc = d3.arc()
+            .innerRadius(0)
+            .outerRadius(radius - 0); // Slightly bigger than main pie
+
+        svg.append("g")
+            .lower() // ⬅️ Send to back layer
+            .selectAll("path")
+            .data(arcs)
+            .join("path")
+            .attr("fill", d => d3.color(d.data.color).brighter(10).copy({opacity: 0.9}))
+            .attr("d", highlightArc);
+    }
+
 
     // Drop shadow
     const defs = svg.append("defs");
@@ -135,14 +169,5 @@ export function diet_barriers_chart(data, age, user_age) {
         .style("font-weight", "bold")
         .text(`group ${age} face when dieting?`);
 
-    if (age === user_age) {
-        const svg_highlight = d3.create("svg")
-            .attr("width", width + 50)
-            .attr("height", height)
-            .attr("viewBox", [-width / 2, -height / 2, width, height])
-            .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;"); // ⬅️ smaller text
-
-        return [svg.node(), svg_highlight.node()];
-    }
-    return [svg.node(), undefined];
+    return svg.node();
 }

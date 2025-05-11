@@ -101,8 +101,7 @@ The five pie charts highlight the most common dieting struggles faced by people 
 Each chart represents a distinct age group, capturing how challenges evolve with age and lifestyle.
 
 ```js
-const [diet_chart_15_18_raw , diet_chart_15_18_highlight] = diet_barriers_chart(lifestyle_data, "15 to 18", age)
-const diet_chart_15_18 = view(diet_chart_15_18_raw)
+const diet_chart_15_18 = view(diet_barriers_chart(lifestyle_data, "15 to 18", age))
 diet_chart_15_18
 
 const diet_chart_19_25 = view(diet_barriers_chart(lifestyle_data, "19 to 25", age))
