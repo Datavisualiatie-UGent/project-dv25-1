@@ -3,8 +3,8 @@ import * as Inputs from "npm:@observablehq/inputs";
 import * as d3 from "d3";
 
 const skip = "I don't really exercise";
-const accompaniment_order = [skip, "Alone", "With a friend", "With a group", "Within a class environment"];
-const length_order = [skip, "30 minutes", "1 hour", "2 hours", "3 hours and above"];
+const accompaniment_order = ["Alone", "With a friend", "With a group", "Within a class environment"];
+const length_order = ["30 minutes", "1 hour", "2 hours", "3 hours and above"];
 
 
 export function Accompaniment() {
@@ -16,7 +16,7 @@ export function Accompaniment() {
 
 
 export function Accompaniment_length_health(data, accompaniment, length) {
-    let data_processed = data.map(row => ({
+    let data_processed = data.filter(row => row.exercise_length !== skip).map(row => ({
         accompaniment: row.with_who,
         length: row.exercise_length,
     }));
@@ -95,7 +95,7 @@ export function Accompaniment_length_health(data, accompaniment, length) {
             }
         );
     }
-    
+
     // Final plot
     return Plot.plot({
         marginLeft: 120,
@@ -103,6 +103,9 @@ export function Accompaniment_length_health(data, accompaniment, length) {
         x: { domain: accompaniment_order },
         y: { grid: true },
         color: { legend: true, domain: length_order },
-        marks: [...y_bars, user_highlight]
+        marks: [...y_bars, user_highlight],
+        x: {
+            label: length === skip ? "We do not have a user indicator if you indicated you don't exercise for exercise length" : ""
+        }
     });
 }
