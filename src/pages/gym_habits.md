@@ -3,6 +3,7 @@
 ```js
 import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
 import { BurnScatterPlot } from "../components/burn_scatter_plot.js";
+import { Water } from "../components/water.js";
 ```
 
 ```js
@@ -32,8 +33,15 @@ Here's some encouraging news: the duration of your workout is a powerful lever f
 Since this relationship holds true across different exercise types, you don't have to push through a workout you simply think burns more; 
 instead, choose an activity you genuinely enjoy, as dedicating more time to it will effectively boost your calorie expenditure and help you stay consistent.
 
+## Water is important
+
+Hydration is crucial for optimal performance and recovery. As well as for your overall health.
+
+```js
+const water = view(Water(gym_data));
+water
+```
+
 ## The Long Game ⏱️: How Experience and Frequency Shape Results
 
 We often hear that "consistency is key." But how do workout frequency and prior experience interact to influence body composition metrics like body fat percentage or BMI?
-
-
