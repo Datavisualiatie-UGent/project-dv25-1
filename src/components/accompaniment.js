@@ -25,14 +25,6 @@ export function Accompaniment_length_health(data, accompaniment, length) {
         accompaniment: accompaniment,
         length: length,
     }
-
-    // Compute grouped data with proportions
-    const groupedByAccLen = d3.rollups(
-        data_processed,
-        v => v.length,
-        d => d.accompaniment,
-        d => d.length
-    );
     
     // Total counts per accompaniment
     const totalByAccompaniment = Object.fromEntries(
@@ -83,19 +75,26 @@ export function Accompaniment_length_health(data, accompaniment, length) {
         d.length === userInput.length
     );
     
+    let user_highlight;
+    if (highlight_block === undefined) {
     // Draw a transparent rectangle over just that block
-    const user_highlight = Plot.rectY(
-        [highlight_block],
-        {
-        x: "accompaniment",
-        y1: "y1",
-        y2: "y2",
-        stroke: "red",
-        strokeWidth: 2,
-        fill: "none",
-        inset: 1
-        }
-    );
+        user_highlight = Plot.rectY(
+            [],
+            {}
+        )
+    } else {
+        user_highlight = Plot.rectY(
+            [highlight_block],
+            {
+            x: "accompaniment",
+            y1: "y1",
+            y2: "y2",
+            stroke: "red",
+            strokeWidth: 2,
+            fill: "none",
+            }
+        );
+    }
     
     // Final plot
     return Plot.plot({
