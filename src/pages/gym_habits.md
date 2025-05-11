@@ -4,6 +4,10 @@
 import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
 import { BurnScatterPlot, WorkoutTypeInput } from "../components/burn_scatter_plot.js";
 import { Water } from "../components/water.js";
+import { Skew, WaterDensityPlot } from "../components/water-density.js";
+
+import {md} from "@observablehq/stdlib";
+import * as Inputs from "npm:@observablehq/inputs";
 ```
 
 ```js
@@ -50,3 +54,18 @@ water
 ## The Long Game ⏱️: How Experience and Frequency Shape Results
 
 We often hear that "consistency is key." But how do workout frequency and prior experience interact to influence body composition metrics like body fat percentage or BMI?
+
+
+## Hydration To The Max 💧: How much water intake is needed, depending on workout?
+
+Water is important, no matter what exercise you perform. But what are the differences in water intake per workout. Let's see!
+
+```js
+const workout_skew = view(Skew())
+workout_skew
+
+const water_density = view(WaterDensityPlot(gym_data, workout_skew))
+water_density
+```
+
+
