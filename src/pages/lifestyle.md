@@ -6,6 +6,7 @@ import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrie
 import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
 import {Diet_radar} from "../components/diet_radar.js";
 import {diet_barriers_chart} from "../components/diet_barriers_chart.js";
+import {Motivations} from "../components/motivations_per_gender.js";
 import {md} from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
@@ -134,4 +135,13 @@ diet_chart_30_40
 
 const diet_chart_40 = view(diet_barriers_chart(lifestyle_data, "40 and above", age))
 diet_chart_40
+```
+
+## What motivates you?
+
+Everyone has different motivations for working out. Can the genders agree on what motivates them?
+
+```js
+const motivation = view(Motivations(lifestyle_data, gender))
+motivation
 ```
