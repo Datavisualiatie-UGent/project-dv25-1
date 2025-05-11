@@ -5,6 +5,7 @@ import {Accompaniment, Accompaniment_length_health} from "../components/accompan
 import {BarrierSelect, BarrierBuster, BarrierInsight} from "../components/barrier_buster.js";
 import {Moment, Length, Healthy, Healthy_Slider, WorkoutMoment} from "../components/health.js";
 import {Diet_radar} from "../components/diet_radar.js";
+import {diet_barriers_chart} from "../components/diet_barriers_chart.js";
 import {md} from "@observablehq/stdlib";
 import * as Inputs from "npm:@observablehq/inputs";
 ```
@@ -112,17 +113,25 @@ barrier_graph
 // const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
 
-## Food: your worst enemy
+## Dieting and it's barriers
+
+Dieting is never easy, and each age groups has different challenges.
+The five pie charts highlight the most common dieting struggles faced by people at the different stages of life.
+Each chart represents a distinct age group, capturing how challenges evolve with age and lifestyle.
 
 ```js
-const diet_radar = view(Diet_radar(lifestyle_data))
-lifestyle_data
-```
+const diet_chart_15_18 = view(diet_barriers_chart(lifestyle_data, "15 to 18", age))
+diet_chart_15_18
 
-```html
-<style>
-          g[aria-label=area] path {fill-opacity: 0.1; transition: fill-opacity .2s;}
-          g[aria-label=area]:hover path:not(:hover) {fill-opacity: 0.05; transition: fill-opacity .2s;}
-          g[aria-label=area] path:hover {fill-opacity: 0.3; transition: fill-opacity .2s;}
-</style>
+const diet_chart_19_25 = view(diet_barriers_chart(lifestyle_data, "19 to 25", age))
+diet_chart_19_25
+
+const diet_chart_26_30 = view(diet_barriers_chart(lifestyle_data, "26 to 30", age))
+diet_chart_26_30
+
+const diet_chart_30_40 = view(diet_barriers_chart(lifestyle_data, "30 to 40", age))
+diet_chart_30_40
+
+const diet_chart_40 = view(diet_barriers_chart(lifestyle_data, "40 and above", age))
+diet_chart_40
 ```
