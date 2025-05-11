@@ -90,7 +90,6 @@ export function Diet_radar(data) {
     const all_barriers = Array.from(filtered_map.keys());
     const age_groups = ["15 to 18", "19 to 25", "26 to 30", "30 to 40", "40 and above"];
 
-    console.log()
 
     // All age group maps
     const age_maps = {
@@ -109,13 +108,6 @@ export function Diet_radar(data) {
         }
         return entry;
     });
-
-
-    // let phones = [
-    //     obj_15_18, obj_19_25, obj_26_30, obj_30_40, obj_40
-    // ];
-
-    console.log(phones);
 
     let points = phones.flatMap(({ name, ...values }) =>
         Object.entries(values).map(([key, value]) => ({ name, key, value }))
