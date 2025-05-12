@@ -1,9 +1,10 @@
 # Gym habits
 
 ```js
-import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
-import { BurnScatterPlot, WorkoutTypeInput } from "../components/burn_scatter_plot.js";
-import { Water } from "../components/water.js";
+import {createHeartRateBoxPlots} from "../components/heart_rate_boxplot.js";
+import {BurnScatterPlot, WorkoutTypeInput} from "../components/burn_scatter_plot.js";
+import {FrequencyBmi, Legend} from "../components/frequency_bmi.js";
+import {Water} from "../components/water.js";
 ```
 
 ```js
@@ -47,6 +48,13 @@ const water = view(Water(gym_data));
 water
 ```
 
-## The Long Game ⏱️: How Experience and Frequency Shape Results
+## Does the frequency in which we workout matter when considering our BMI?
 
-We often hear that "consistency is key." But how do workout frequency and prior experience interact to influence body composition metrics like body fat percentage or BMI?
+The relationship between workout frequency and BMI is complex. Don't forget that BMI doesn't show everything about your health.
+It doesn't account for muscle mass, fat distribution, or other health markers.
+
+```js
+const legend = view(Legend());
+const frequency_bmi_heatmap = view(FrequencyBmi(gym_data));
+frequency_bmi_heatmap
+```
