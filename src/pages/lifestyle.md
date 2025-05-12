@@ -114,7 +114,7 @@ barrier_graph
 // const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
 
-## Dieting and it's barriers
+## Dieting and its barriers
 
 Dieting is never easy, and each age groups has different challenges.
 The five pie charts highlight the most common dieting struggles faced by people at the different stages of life.

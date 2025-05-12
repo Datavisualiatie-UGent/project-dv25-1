@@ -5,7 +5,7 @@ import * as Inputs from "npm:@observablehq/inputs";
 // Input for the moment of the day
 export function Moment() {
     return Inputs.radio(["Early morning", "Afternoon", "Evening"], {
-        label: "When do you workout?",
+        label: "When do you work out?",
         value: "Afternoon"
     })
 }
@@ -13,7 +13,7 @@ export function Moment() {
 // Input for the length of the workout
 export function Length(options) {
     return Inputs.radio(options, {
-        label: "How long do you workout?",
+        label: "How long do you work out?",
         value: "30 minutes"
     })
 }
