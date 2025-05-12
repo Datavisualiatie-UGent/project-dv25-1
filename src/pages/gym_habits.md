@@ -25,6 +25,8 @@ const heart_rate_box_plots = view(createHeartRateBoxPlots(gym_data));
 heart_rate_box_plots
 ```
 
+All plots don't overlap much, which shows the huge dynamic range that our heart is capable of.
+
 ## Maximizing Your Burn 🔥: Which Workouts Deliver and For How Long?
 
 A common goal for many is maximizing calorie expenditure. But how do different workout types stack up, and how does duration play a role?
@@ -57,12 +59,18 @@ const water_density = view(WaterDensityPlot(gym_data, workout_skew))
 water_density
 ```
 
-Hydration is crucial for optimal performance and recovery. As well as for your overall health.
+Hydration is crucial for optimal performance and recovery, as well as for your overall health.
+But this graph tells us there aren't really any general optimal water intake amounts.
+It might depend heavily on the person.
+Or people are very bad at getting hydrated ¯\(ツ)/¯.
 
 ```js
 const water = view(Water(gym_data));
 water
 ```
+
+Water intake is negatively correlated with fat percentage.
+This does not mean there's a causation, there might just be a common way of life between the two factors.
 
 ## Does the frequency in which we workout matter when considering our BMI?
 
