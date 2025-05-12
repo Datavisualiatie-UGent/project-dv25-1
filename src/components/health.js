@@ -11,8 +11,8 @@ export function Moment() {
 }
 
 // Input for the length of the workout
-export function Length() {
-    return Inputs.radio(["I don't really exercise", "30 minutes", "1 hour", "2 hours", "3 hours and above"], {
+export function Length(options) {
+    return Inputs.radio(options, {
         label: "How long do you workout?",
         value: "30 minutes"
     })

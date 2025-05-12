@@ -56,7 +56,7 @@ Your personal input will be shown as a dot on the heatmap, so you can easily see
 
 ```js
 const moment = view(Moment())
-const length = view(Length())
+const length = view(Length(["I don't really exercise", "30 minutes", "1 hour", "2 hours", "3 hours and above"]))
 const healthy_slider = view(Healthy_Slider())
 moment
 length
@@ -85,7 +85,7 @@ This graph shows how much this could influence your exercise time per day.
 You can select the values that correspond to you, and we will show you your standings compared to other people.
 
 ```js
-const length_social = view(Length())
+const length_social = view(Length(["30 minutes", "1 hour", "2 hours", "3 hours and above"]))
 length_social
 const accompaniment = view(Accompaniment())
 accompaniment
