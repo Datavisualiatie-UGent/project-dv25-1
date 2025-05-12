@@ -27,11 +27,9 @@ age
 
 ## How important is exercise?
 
-In this chart, you'll find the average importance people place on exercise, divided by age groups and gender.
+In this chart, you'll find the average importance people place on exercise, divided by gender.
 Participants rated how vital working out is to their lives on a scale from 0 (not important) to 5 (extremely important).
-Each age group — from teens to those 40 and above — shows distinct trends and priorities between males and females.
 Now it's your turn: use the slider to share how important exercise is to you personally.
-As you move the slider, a dot will appear on the chart, showing exactly where you stand compared to the average in your demographic.
 Take a moment to explore — are you more motivated than most? Or is there inspiration waiting for you?
 
 ```js
@@ -120,7 +118,7 @@ barrier_graph
 
 Dieting is never easy, and each age groups has different challenges.
 The five pie charts highlight the most common dieting struggles faced by people at the different stages of life.
-Each chart represents a distinct age group, capturing how challenges evolve with age and lifestyle.
+Each chart represents a distinct age group, capturing how challenges evolve with age.
 
 ```js
 const diet_chart_15_18 = view(diet_barriers_chart(lifestyle_data, "15 to 18", age))

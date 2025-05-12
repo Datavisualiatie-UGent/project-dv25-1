@@ -62,7 +62,7 @@ export function BarrierBuster(data, selectedBarrier) {
 
     // Prepare data for plot
     return Plot.plot({
-        marginLeft: 200,
+        marginLeft: 350,
         marginBottom: 40,
         title: `What Motivates People Who Face: "${selectedBarrier}"`,
         x: {

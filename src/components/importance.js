@@ -12,12 +12,6 @@ export function Importance(data, user_gender, user_age, user_importance) {
         how_important: +d.how_important
     }));
 
-    // Set up user data
-    const user_data = {
-        gender: user_gender,
-        how_important: +user_importance
-    };
-
     // Create a mapping of how important to the number of responses
     const grouped = d3.rollups(
         data_processed,
@@ -40,7 +34,7 @@ export function Importance(data, user_gender, user_age, user_importance) {
         marginBottom: 100,
         fx: {padding: 0, label: null, tickRotate: 0, tickSize: 6},
         x: {axis: null, paddingOuter: 0.2, type: "band"},
-        y: {grid: true},
+        y: {grid: true, label: "Amount of times selected", tickFormat: d3.format(",")},
         color: {
             legend: true,
             type: "ordinal",

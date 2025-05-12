@@ -60,7 +60,7 @@ export function Water(data) {
             grid: true
         },
         y: {
-            label: "Water drunk (L) (per day)",
+            label: "Mean water drunk (L) (per day)",
             grid: true
         },
         color: {

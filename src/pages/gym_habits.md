@@ -6,7 +6,7 @@ import { Generators } from "@observablehq/runtime"
 import * as Inputs from "npm:@observablehq/inputs";
 import {createHeartRateBoxPlots} from "../components/heart_rate_boxplot.js";
 import {BurnScatterPlot, WorkoutTypeInput} from "../components/burn_scatter_plot.js";
-import {FrequencyBmi, Legend} from "../components/frequency_bmi.js";
+import {FrequencyBmi, Legend, HeightCategory, weightCategory, frequencyCategory} from "../components/frequency_bmi.js";
 import { WorkoutSkew, WaterDensityPlot } from "../components/water-density.js";
 import {Water} from "../components/water.js";
 ```
@@ -70,7 +70,16 @@ The relationship between workout frequency and BMI is complex. Don't forget that
 It doesn't account for muscle mass, fat distribution, or other health markers.
 
 ```js
+const height_category = view(HeightCategory());
+const weight_category = view(weightCategory());
+const frequency_category = view(frequencyCategory());
+height_category
+weight_category
+frequency_category
+```
+
+```js
 const legend = view(Legend());
-const frequency_bmi_heatmap = view(FrequencyBmi(gym_data));
+const frequency_bmi_heatmap = view(FrequencyBmi(gym_data, height_category, weight_category, frequency_category));
 frequency_bmi_heatmap
 ```

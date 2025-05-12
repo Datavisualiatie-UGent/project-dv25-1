@@ -100,12 +100,9 @@ export function Accompaniment_length_health(data, accompaniment, length) {
     return Plot.plot({
         marginLeft: 120,
         padding: 0,
-        x: { domain: accompaniment_order },
-        y: { grid: true },
+        x: { domain: accompaniment_order, label: length === skip ? "We do not have a user indicator if you indicated you don't exercise for exercise length" : "" },
+        y: { grid: true, label: "Percentage"},
         color: { legend: true, domain: length_order },
         marks: [...y_bars, user_highlight],
-        x: {
-            label: length === skip ? "We do not have a user indicator if you indicated you don't exercise for exercise length" : ""
-        }
     });
 }

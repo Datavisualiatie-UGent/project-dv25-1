@@ -69,7 +69,6 @@ export function diet_barriers_chart(data, age, user_age) {
         .range(d3.schemeTableau10);     // or your preferred color palette
 
     const colorMap = new Map(options.map(option => [option, colorScale(option)]));
-    console.log(age, colorMap);
 
     data.forEach(d => {
         d.color = colorMap.get(d.name);  // save the color to the object
@@ -98,7 +97,7 @@ export function diet_barriers_chart(data, age, user_age) {
     if (user_age_group === age) {
         const highlightArc = d3.arc()
             .innerRadius(0)
-            .outerRadius(radius - 0); // Slightly bigger than main pie
+            .outerRadius(radius); // Slightly bigger than main pie
 
         svg.append("g")
             .lower() // ⬅️ Send to back layer

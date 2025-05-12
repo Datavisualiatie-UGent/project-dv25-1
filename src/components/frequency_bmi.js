@@ -1,4 +1,26 @@
 import * as Plot from "@observablehq/plot";
+import * as Inputs from "npm:@observablehq/inputs";
+
+// Input for the height category
+export function HeightCategory() {
+    return Inputs.text({
+        label: "Height",
+    })
+}
+
+export function weightCategory() {
+    return Inputs.text({
+        label: "Weight",
+    })
+}
+
+export function frequencyCategory() {
+    return Inputs.radio([2, 3, 4, 5], {
+        label: "Workout Frequency (days/week)",
+        value: 3,
+        title: d => `${d} days/week`
+    })
+}
 
 function setColor(bmi_num) {
     if (bmi_num < 18.5) {
@@ -23,7 +45,7 @@ export function Legend() {
     })
 }
 
-export function FrequencyBmi(data) {
+export function FrequencyBmi(data, height, weight, frequency) {
     // Process data for easier plotting
     let data_processed= []
     data.forEach((item) => {
@@ -34,6 +56,15 @@ export function FrequencyBmi(data) {
             {bmi: bmi, frequency: frequency}
         )
     })
+
+    let user_data = {};
+
+    if (!isNaN(height) && !isNaN(weight) && height > 0 && weight > 0) {
+        user_data = {
+            bmi: +weight / ((+height / 100) ** 2),
+            frequency: +frequency
+        };
+    }
 
     return Plot.plot({
         marginLeft: 60,
@@ -48,11 +79,18 @@ export function FrequencyBmi(data) {
 
             // Dots with jitter for visibility
             Plot.dot(data_processed, {
-                x: d => d.frequency + (Math.random() - 0.5) * 0.3, // jitter x-axis slightly
+                x: d => d.frequency + (Math.random() - 0.5) * 0.4, // jitter x-axis slightly
                 y: "bmi",
                 r: 2,
                 fill: d => setColor(d.bmi),
                 opacity: 0.6
+            }),
+
+            Plot.dot([user_data], {
+                x: "frequency",
+                y: "bmi",
+                r: 7,
+                fill: "white"
             }),
         ]
     });
