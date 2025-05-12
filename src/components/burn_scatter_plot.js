@@ -1,7 +1,17 @@
 import * as Plot from "@observablehq/plot";
+import * as Inputs from "npm:@observablehq/inputs";
 
-export function BurnScatterPlot(data) {
+export function WorkoutTypeInput(options) {
+    return Inputs.select(options, {
+        label: "Choose your workout type:",
+        multiple: true,
+        value: options
+    })
+}
+
+export function BurnScatterPlot(data, workout_options) {
     // Ensure numeric fields are treated as numbers
+    data = data.filter(d => workout_options.includes(d["Workout_Type"]));
     const processedData = data.map(d => ({
         ...d,
         Session_Duration_hours: Number(d["Session_Duration (hours)"]),

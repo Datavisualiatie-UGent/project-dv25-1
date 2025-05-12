@@ -2,7 +2,7 @@
 
 ```js
 import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
-import { BurnScatterPlot } from "../components/burn_scatter_plot.js";
+import { BurnScatterPlot, WorkoutTypeInput } from "../components/burn_scatter_plot.js";
 import { Water } from "../components/water.js";
 ```
 
@@ -25,7 +25,12 @@ heart_rate_box_plots
 A common goal for many is maximizing calorie expenditure. But how do different workout types stack up, and how does duration play a role?
 
 ```js
-const burn_scatter_plot = view(BurnScatterPlot(gym_data));
+const workout_type_input = view(WorkoutTypeInput(["Cardio", "Strength", "HIIT", "Yoga"]));
+workout_type_input
+```
+
+```js
+const burn_scatter_plot = view(BurnScatterPlot(gym_data, workout_type_input));
 burn_scatter_plot
 ```
 
