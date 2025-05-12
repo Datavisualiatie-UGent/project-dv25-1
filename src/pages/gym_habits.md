@@ -1,9 +1,13 @@
 # Gym habits
 
 ```js
+import {md} from "@observablehq/stdlib";
+import { Generators } from "@observablehq/runtime"
+import * as Inputs from "npm:@observablehq/inputs";
 import {createHeartRateBoxPlots} from "../components/heart_rate_boxplot.js";
 import {BurnScatterPlot, WorkoutTypeInput} from "../components/burn_scatter_plot.js";
 import {FrequencyBmi, Legend} from "../components/frequency_bmi.js";
+import { WorkoutSkew, WaterDensityPlot } from "../components/water-density.js";
 import {Water} from "../components/water.js";
 ```
 
@@ -39,7 +43,19 @@ Here's some encouraging news: the duration of your workout is a powerful lever f
 Since this relationship holds true across different exercise types, you don't have to push through a workout you simply think burns more; 
 instead, choose an activity you genuinely enjoy, as dedicating more time to it will effectively boost your calorie expenditure and help you stay consistent.
 
-## Water is important
+## Hydration To The Max 💧: How much water intake is needed, depending on workout?
+
+Water is important, no matter what exercise you perform. But what are the differences in water intake per workout. Let's see!
+
+```js
+const workout_skew = view(WorkoutSkew())
+workout_skew
+```
+
+```js
+const water_density = view(WaterDensityPlot(gym_data, workout_skew))
+water_density
+```
 
 Hydration is crucial for optimal performance and recovery. As well as for your overall health.
 
