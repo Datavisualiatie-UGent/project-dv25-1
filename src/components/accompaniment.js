@@ -105,7 +105,10 @@ export function Accompaniment_length_health(data, accompaniment, length) {
         color: { legend: true, domain: length_order },
         marks: [...y_bars, user_highlight],
         x: {
-            label: length === skip ? "We do not have a user indicator if you indicated you don't exercise for exercise length" : ""
+            label: "Accompaniment"
+        },
+        y: {
+            label: "Relative frequency"
         }
     });
 }
