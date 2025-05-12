@@ -96,6 +96,8 @@ const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, acc
 accompaniment_graph
 ```
 
+We do not have a user indicator if you indicated you don't exercise for exercise length
+
 ## Barrier Buster: Find Your Motivation
 
 Everyone faces challenges on their fitness journey. What's holding you back from exercising more regularly?
