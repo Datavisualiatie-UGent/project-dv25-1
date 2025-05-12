@@ -85,12 +85,14 @@ This graph shows how much this could influence your exercise time per day.
 You can select the values that correspond to you, and we will show you your standings compared to other people.
 
 ```js
+const length_social = view(Length())
+length_social
 const accompaniment = view(Accompaniment())
 accompaniment
 ```
 
 ```js
-const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, accompaniment, length))
+const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, accompaniment, length_social))
 accompaniment_graph
 ```
 
