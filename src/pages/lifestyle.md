@@ -44,6 +44,8 @@ const importance_graph = view(Importance(lifestyle_data, gender, age, importance
 importance_graph
 ```
 
+Workout have a more elevated status among men, but the proportion that doesn't care about workouts seems pretty equal.
+
 ## How much and often do you need to exercise to be healthy?
 
 **How healthy do you feel compared to others?**  
@@ -65,6 +67,11 @@ healthy_slider
 const healthy_graph = view(Healthy(lifestyle_data, moment, length, healthy_slider))
 healthy_graph
 ```
+
+Exercising for 2 hours and exercising for 3 hours shows a stark difference. 
+People go from feeling averagely healthy to feeling extremely healthy.
+Feeling extremely healthy when doing workouts of 3 hours seems to check out.
+We should keep in mind that the amount of workouts per week aren't shown here, which could also have a huge influence on how healthy someone feels.
 
 ## Fun fact
 Nobody works out in the afternoon
@@ -94,6 +101,12 @@ const accompaniment_graph = view(Accompaniment_length_health(lifestyle_data, acc
 accompaniment_graph
 ```
 
+If we exclude doing workouts within a class environment, then time exercised clearly increases the more people you train with.
+Of course, if I was with someone, I would enjoy spending as much time with them as I could.
+But within a class environment, it's a little more nuanced. 
+Workouts of 1 hour are most prominent.
+This is most probably because physical class lessons take around 1 hour, such that this is just the length of the average physical lesson.
+
 ## Barrier Buster: Find Your Motivation
 
 Everyone faces challenges on their fitness journey. What's holding you back from exercising more regularly?
@@ -113,6 +126,11 @@ barrier_graph
 ```js
 // const insight = view(BarrierInsight(lifestyle_data, barrier))
 ```
+
+So much motivation! 
+For example, people that have an injury want to practice to become more flexible or relieve stress.
+And getting an injury does the exact opposite.
+These people really have got the spirit!
 
 ## Dieting and its barriers
 
@@ -137,6 +155,12 @@ const diet_chart_40 = view(diet_barriers_chart(lifestyle_data, "40 and above", a
 diet_chart_40
 ```
 
+Every age group struggles with something different.
+The group of ages 26 - 30 only struggles with temptation and cravings, for example.
+This group is rather small, though, and is therefore highly biased, which explains only one category for this age group.
+Almost everyone does struggle with a lack of time, but what's interesting is the ages of 19-25 also struggling with cost.
+This can make sense, since this is the start of a person's adult life, where they become more independent and are still finding a steady basis.
+
 ## What motivates you?
 
 Everyone has different motivations for working out. Can the genders agree on what motivates them?
@@ -145,3 +169,8 @@ Everyone has different motivations for working out. Can the genders agree on wha
 const motivation = view(Motivations(lifestyle_data, gender))
 motivation
 ```
+
+Most motivations correlate between genders.
+Muscle mass is an outlier that resonates way more with the male population, while fat loss resonates more with the female population.
+Wanting to achieve a sporting goal also has 2 time more correspondents in the male population than the female population.
+Here we should take into account that there are more female correspondents in the dataset than male correspondents in total.
