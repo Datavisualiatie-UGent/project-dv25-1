@@ -4,9 +4,10 @@
 import { createHeartRateBoxPlots } from "../components/heart_rate_boxplot.js";
 import { BurnScatterPlot, WorkoutTypeInput } from "../components/burn_scatter_plot.js";
 import { Water } from "../components/water.js";
-import { Skew, WaterDensityPlot } from "../components/water-density.js";
+import { WorkoutSkew, WaterDensityPlot } from "../components/water-density.js";
 
 import {md} from "@observablehq/stdlib";
+import { Generators } from "@observablehq/runtime"
 import * as Inputs from "npm:@observablehq/inputs";
 ```
 
@@ -61,9 +62,11 @@ We often hear that "consistency is key." But how do workout frequency and prior 
 Water is important, no matter what exercise you perform. But what are the differences in water intake per workout. Let's see!
 
 ```js
-const workout_skew = view(Skew())
+const workout_skew = view(WorkoutSkew())
 workout_skew
+```
 
+```js
 const water_density = view(WaterDensityPlot(gym_data, workout_skew))
 water_density
 ```
